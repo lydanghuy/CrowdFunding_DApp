@@ -3,7 +3,7 @@ import { Card, Grid, Button } from 'semantic-ui-react';
 import Layout from '../../components/Layout';
 import Campaign from '../../ethereum/campaign';
 import web3 from '../../ethereum/web3';
-// import ContributeForm from '../../components/ContributeForm';
+import DonateForm from '../../components/DonateForm';
 import { Link } from '../../routes';
 
 class CampaignShow extends Component {
@@ -34,7 +34,7 @@ class CampaignShow extends Component {
         } = this.props;
 
         const items = [
-            
+
             {
                 header: creator,
                 meta: 'Address of Campaign\'s Creator',
@@ -43,10 +43,10 @@ class CampaignShow extends Component {
                 style: { overflowWrap: 'break-word' }
             },
             {
-                header: minimumContribution,
+                header: minimumContribution + ' (wei) = ' + minimumContribution/1000000000000000000 + ' (ether)',
                 meta: 'Minimum Contribution (wei)',
                 description:
-                'You must contribute at least ' + minimumContribution + ' wei to become a contributor'
+                'You must donate at least ' + minimumContribution + ' wei to become a contributor'
             },
             {
                 header: requestsCount,
@@ -68,7 +68,16 @@ class CampaignShow extends Component {
             }
           ];
       
-        return <Card.Group items={items} />;
+        return (
+            <div>
+                <Card fluid>
+                    <Card.Content header={campaignName} />
+                    <Card.Content description={campaignDescription} />
+                </Card>
+                <br/><br/><br/>
+                <Card.Group  itemsPerRow={3} items={items} />
+            </div>
+        );
 
 
     }
@@ -77,13 +86,12 @@ class CampaignShow extends Component {
         return (
             <Layout>
                 <h3>Campaign Show</h3>
-                {this.renderCampaignDetails()}
 
-                {/* <Grid>
+                <Grid>
                 <Grid.Row>
-                    <Grid.Column width={10}>{this.renderCards()}</Grid.Column>
-                    <Grid.Column width={6}>
-                        <ContributeForm address={this.props.address} />
+                    <Grid.Column width={12}>{this.renderCampaignDetails()}</Grid.Column>
+                    <Grid.Column width={4} >
+                        <DonateForm address={this.props.address} />
                     </Grid.Column>
                 </Grid.Row>
       
@@ -94,7 +102,7 @@ class CampaignShow extends Component {
                         </Link>
                   </Grid.Column>
                 </Grid.Row>
-              </Grid> */}
+              </Grid>
             </Layout>
           );
     }
