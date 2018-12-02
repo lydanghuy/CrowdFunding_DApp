@@ -8,22 +8,22 @@ import Campaign from '../ethereum/campaign';
 class CampaignIndex extends Component {
     static async getInitialProps() {
         const campaignAddresses = await factory.methods.getDeployedCampaigns().call();
-        // console.log('\n' + campaignList[0].options.address);
+        var campaignNameContainer = [];
+        for(var index in campaignAddresses){
+            var campaign = Campaign(campaignAddresses[index]);
+            var campaignName = await campaign.methods.CampaignName().call();
+            campaignNameContainer.push(campaignName);
+        }
         return { 
-            campaignAddresses
+            campaignAddresses, campaignNameContainer
         };
     }
     
     renderCampaigns() {
-        const items = this.props.campaignAddresses.map(address => {
-            var campaign = Campaign(address);
-            
-            var campaignName = campaign.methods.CampaignName().call().then(name => {
-                // console.log(name);
-            });
+        const items = this.props.campaignAddresses.map((address, index)=> {
             return {
-                header: address,
-                // meta: address,
+                header: this.props.campaignNameContainer[index],
+                meta: address,
                 description: (
                     <Link route={`/campaigns/${address}`}>
                         <a>View Campaign</a>
@@ -31,7 +31,7 @@ class CampaignIndex extends Component {
                 ),
                 fluid: true
             }
-        })
+    })
 
         return <Card.Group items={items} />;
     }
