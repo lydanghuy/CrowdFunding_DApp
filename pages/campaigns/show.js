@@ -46,7 +46,7 @@ class CampaignShow extends Component {
                 header: minimumContribution + ' (wei) = ' + minimumContribution/1000000000000000000 + ' (ether)',
                 meta: 'Minimum Contribution (wei)',
                 description:
-                'You must donate at least ' + minimumContribution + ' wei to become a contributor'
+                'You must donate more than ' + minimumContribution + ' wei to become a contributor'
             },
             {
                 header: requestsCount,
