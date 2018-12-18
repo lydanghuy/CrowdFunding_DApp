@@ -20,7 +20,7 @@ beforeEach(async () => {
     
     //set minimum contribution is 100
     await factory.methods.createCampaign('100','SmartWatch',
-		'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.')
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry')
 		.send({
     	    from: accounts[0],
             gas: '4700000'
@@ -56,7 +56,6 @@ describe('Campaigns', () => {
                 value: '5',
                 from: accounts[1]
         });
-            assert(false);
         } catch (err) {
             assert(err);
       }
@@ -77,7 +76,7 @@ describe('Campaigns', () => {
       });
   
         await campaign.methods
-        .createRequest('A', web3.utils.toWei('5', 'ether'), accounts[1])
+        .createRequest('A', web3.utils.toWei('5', 'ether'), accounts[2])
         .send({ from: accounts[0], gas: '1000000' });
   
         await campaign.methods.approveRequest(0).send({
@@ -90,9 +89,14 @@ describe('Campaigns', () => {
             gas: '1000000'
         });
   
-        let balance = await web3.eth.getBalance(accounts[1]);
-        balance = web3.utils.fromWei(balance, 'ether');
-        balance = parseFloat(balance);
-        assert(balance > 104);
+        let account2_balance = await web3.eth.getBalance(accounts[2]);
+        account2_balance = web3.utils.fromWei(account2_balance, 'ether');
+        account2_balance = parseFloat(account2_balance);
+        assert.equal(account2_balance, 105);
+        
+        let campaign_balance = await web3.eth.getBalance(campaign.options.address);
+        campaign_balance = web3.utils.fromWei(campaign_balance, 'ether');
+        campaign_balance = parseFloat(campaign_balance);
+        assert.equal(campaign_balance, 5);
     });
 });
