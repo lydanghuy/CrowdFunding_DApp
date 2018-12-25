@@ -49,7 +49,7 @@ class CreateNewRequest extends Component {
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Field>
                         <label>Description</label>
-                        <Input
+                        <Input required
                             value={this.state.description}
                             onChange={event => this.setState({description: event.target.value})}/>
                     </Form.Field>
