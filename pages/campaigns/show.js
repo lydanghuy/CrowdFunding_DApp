@@ -37,7 +37,7 @@ class CampaignShow extends Component {
 
             {
                 header: creator,
-                meta: 'Address of Campaign\'s Creator',
+                meta: 'Address of Campaign Creator',
                 description:
                 'The creator created this campaign and can create requests to withdraw money',
                 style: { overflowWrap: 'break-word' }
