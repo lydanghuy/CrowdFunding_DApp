@@ -58,7 +58,7 @@ describe('Campaigns', () => {
         });
         } catch (err) {
             assert(err);
-      }
+        }
     });
   
     it('allows a creator to make a payment request', async () => {
@@ -76,7 +76,7 @@ describe('Campaigns', () => {
       });
   
         await campaign.methods
-        .createRequest('A', web3.utils.toWei('5', 'ether'), accounts[2])
+        .createRequest('Buy glasses', web3.utils.toWei('5', 'ether'), accounts[2])
         .send({ from: accounts[0], gas: '1000000' });
   
         await campaign.methods.approveRequest(0).send({

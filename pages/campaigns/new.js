@@ -52,9 +52,10 @@ class CampaignNew extends Component {
 
                     <Form.Field>
                         <label>Minimum Contribution</label>
-                        <Input type='number' min='1' label='wei' labelPosition='right' value={this.state.minimumContribution} 
+                        <Input required type='number' min='1' label='wei' labelPosition='right' value={this.state.minimumContribution} 
                             onChange={event => this.setState({minimumContribution : event.target.value})}/>
                     </Form.Field>
+                    
                     <Message error header="Oops!" content={this.state.errorMessage} />
                     <Button loading={this.state.loading} primary>Create!</Button>
                 </Form>
