@@ -1,2 +1,2 @@
 # CrowdFunding_DApp
-Learn from https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/
+Learning and implementing following to https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/
